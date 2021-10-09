@@ -1,15 +1,16 @@
 const rescue = require('express-rescue');
-const modelExercise = require('../models');
+const {exercises} = require('../models');
 
 const post = rescue(async (req, res) => {
   const {name, tecnologia} = req.body;
-  const neExercise = await modelExercise.create({name, tecnologia});
+  const newExercise = await exercises.create({name, tecnologia});
   return res.status(201).json(
-    {message: "exercise criado com sucesso", neExercise}); 
+    {message: "exercise criado com sucesso", newExercise}); 
 });
 
-const get = rescue((_req, res) => {
-  return res.status(200).json({message: "Hello World"})
+const get = rescue(async (_req, res) => {
+  const findAllExercises = await exercises.findAll();
+  return res.status(200).json(findAllExercises)
 })
 
 module.exports = {
