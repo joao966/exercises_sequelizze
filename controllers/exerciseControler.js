@@ -8,12 +8,20 @@ const post = rescue(async (req, res) => {
     {message: "exercise criado com sucesso", newExercise}); 
 });
 
-const get = rescue(async (_req, res) => {
+const getAll = rescue(async (_req, res) => {
   const findAllExercises = await exercises.findAll();
   return res.status(200).json(findAllExercises)
 })
 
+const getById = rescue(async (req, res) => {
+  const {id} = req.params;
+  const exerciseById = await exercises.findByPk(id);
+  return res.status(200).json(exerciseById)
+})
+
+
 module.exports = {
-  get,
+  getAll,
   post,
+  getById,
 }
