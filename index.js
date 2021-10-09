@@ -6,6 +6,8 @@ const exercisesController = require('./controllers/exerciseControler');
 const app = express();
 app.use(bodyParser.json());
 
-app.use('/exercises', exercisesController.get);
+app.get('/exercises', exercisesController.get);
+app.post('/exercises', exercisesController.post);
+
 
 app.listen(3000, () => console.log('online'))
